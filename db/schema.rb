@@ -10,12 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_27_002416) do
+ActiveRecord::Schema.define(version: 2018_07_27_020610) do
 
   create_table "alarms", force: :cascade do |t|
     t.string "name"
     t.integer "duration"
     t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_alarms", force: :cascade do |t|
+    t.integer "alarm_id"
+    t.integer "owner_id"
+    t.integer "referrer_id"
+    t.boolean "is_secret", default: false
+    t.boolean "is_high_priority", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
