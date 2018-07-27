@@ -4,8 +4,11 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+valid:
+  username: "unique"
+  facebook_connection: "facebook"
 # column: value
 #
-two: {}
+invalid:
+  username: "super long name that is really long and def longer than it should be"
 # column: value
