@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 2018_07_27_020610) do
     t.integer "alarm_id"
     t.integer "owner_id"
     t.integer "referrer_id"
-    t.boolean "is_secret", default: false
-    t.boolean "is_high_priority", default: false
+    t.boolean "is_secret", default: false, null: false
+    t.boolean "is_high_priority", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

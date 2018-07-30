@@ -7,7 +7,7 @@
 valid:
   name: "Crazy Alarm"
   duration: 100
-  user_id: 1
+  user: valid
 #
 invalid:
   name: "super long name that is really long and def longer than it should be"

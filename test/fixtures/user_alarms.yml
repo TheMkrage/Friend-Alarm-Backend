@@ -5,9 +5,9 @@
 # below each fixture, per the syntax in the comments below
 #
 valid:
-  alarm_id: 1
-  referrer_id: 1
-  owner_id: 1
+  alarm: valid
+  referrer: valid
+  owner: valid
 # column: value
 #
 invalid: {}

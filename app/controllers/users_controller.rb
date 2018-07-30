@@ -1,13 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
 
-  # GET /users
-  def index
-    @users = User.all
-
-    render json: @users
-  end
-
   # GET /users/1
   def show
     render json: @user
@@ -33,9 +26,8 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  def destroy
-    @user.destroy
+  def search
+
   end
 
   private
@@ -46,6 +38,6 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.fetch(:user, {})
+      params.permit(:username, :facebook_connection)
     end
 end
