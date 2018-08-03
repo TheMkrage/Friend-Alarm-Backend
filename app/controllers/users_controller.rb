@@ -26,8 +26,11 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET /search
   def search
-
+    where_clause = "lower(username) LIKE '%" << params[:query].downcase << "%'"
+    @users = User.where(where_clause)
+    render json: @users
   end
 
   private

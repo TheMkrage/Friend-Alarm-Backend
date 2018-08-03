@@ -22,4 +22,10 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     patch user_url(@user), params: { }, as: :json
     assert_response 200
   end
+
+  test "search" do
+    search_url = "/search?query=u"
+    get search_url, as: :json
+    assert_response 200
+  end
 end
