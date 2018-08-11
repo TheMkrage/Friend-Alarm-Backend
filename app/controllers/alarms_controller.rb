@@ -46,6 +46,6 @@ class AlarmsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def alarm_params
-      params.permit(:name, :duration, :user_id)
+      params.permit(:name, :duration, :user_id, :audio_file)
     end
 end
