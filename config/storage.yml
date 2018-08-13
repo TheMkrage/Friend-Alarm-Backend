@@ -8,8 +8,8 @@ local:
 
 amazon:
   service: S3
-  access_key_id: "AKIAJYZIHT6RFDTIZ2YQ"
-  secret_access_key: "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"
+  access_key_id: <% ENV['aws-access'] %>
+  secret_access_key: <% ENV['aws-secret'] %>
   region: "us-east-2"
   bucket: "friend-alarm"
 
