@@ -8,8 +8,8 @@ local:
 
 amazon:
   service: S3
-  access_key_id: <% ENV['aws-access'] %>
-  secret_access_key: <% ENV['aws-secret'] %>
+  access_key_id: <%= ENV['aws-access'] %>
+  secret_access_key: <%= ENV['aws-secret'] %>
   region: "us-east-2"
   bucket: "friend-alarm"
 
