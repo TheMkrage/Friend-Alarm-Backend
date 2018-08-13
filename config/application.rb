@@ -13,12 +13,6 @@ module FriendAlarm
 
     config.api_only = true
 
-    puts '\nHERE YOU GO'
-    puts ENV['aws-access']
-    puts ENV['RAILS_ENV']
-    puts ENV.fetch('RAILS_ENV')
-    puts ENV.fetch('aws-access')
-    puts 'HERE YOU GO\n'
     #AWS.config(
     #  access_key_id: ENV['aws-access'],
     #  secret_access_key: ENV['aws-secret']
