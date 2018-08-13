@@ -16,10 +16,10 @@ module FriendAlarm
     puts '\nHERE YOU GO'
     puts ENV['aws-access']
     puts 'HERE YOU GO\n'
-    AWS.config(
-      access_key_id: ENV['aws-access'],
-      secret_access_key: ENV['aws-secret']
-    )
+    #AWS.config(
+    #  access_key_id: ENV['aws-access'],
+    #  secret_access_key: ENV['aws-secret']
+    #)
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
