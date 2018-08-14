@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :destroy, :alarms]
 
   # GET /users/1
   def show
@@ -31,6 +31,10 @@ class UsersController < ApplicationController
     where_clause = "lower(username) LIKE '%" << params[:query].downcase << "%'"
     @users = User.where(where_clause)
     render json: @users
+  end
+
+  def alarms
+    render json: @user.alarms
   end
 
   private
