@@ -5,14 +5,9 @@ class AlarmsControllerTest < ActionDispatch::IntegrationTest
     @alarm = alarms(:valid)
   end
 
-  test "should get index" do
-    get alarms_url, as: :json
-    assert_response :success
-  end
-
   test "should create alarm" do
     assert_difference('Alarm.count') do
-      puts post alarms_url, params: @alarm, as: :json
+      post alarms_url, params: @alarm, as: :json
     end
 
     assert_response 201

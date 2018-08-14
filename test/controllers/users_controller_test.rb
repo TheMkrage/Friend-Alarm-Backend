@@ -28,4 +28,10 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get search_url, as: :json
     assert_response 200
   end
+
+  test "get alarms from user" do
+    url = user_url(@user) + "/alarms"
+    get url, as: :json
+    assert_response 200
+  end
 end
