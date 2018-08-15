@@ -3,7 +3,7 @@ class AlarmSerializer < ActiveModel::Serializer
 
   def file_url
     if object.audio_file.attached?
-      object.audio_file.service_url
+      url_for(object.audio_file)
     end
   end
 
