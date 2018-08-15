@@ -3,7 +3,7 @@ class AlarmSerializer < ActiveModel::Serializer
 
   def file_url
     if object.audio_file.attached?
-      rails_blob_path(object.audio_file, disposition: "attachment")
+      object.audio_file.service_url
     end
   end
 
