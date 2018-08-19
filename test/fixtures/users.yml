@@ -7,6 +7,7 @@
 valid:
   username: "unique"
   facebook_connection: "facebook"
+  apn_token: "0c4c2a8ccf40c1505893a9c0c5770fce62213efdbab753d9ca06afe3441b90e9"
 # column: value
 #
 invalid:

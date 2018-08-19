@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy, :alarms]
+  before_action :set_user, only: [:show, :update, :destroy, :alarms, :schedule_alarm]
 
   # GET /users/1
   def show
@@ -33,8 +33,16 @@ class UsersController < ApplicationController
     render json: @users
   end
 
+  # GET /users/:id/alarms
   def alarms
     render json: @user.alarms
+  end
+
+  # POST /users/:id/schedule
+  def schedule_alarm
+    alarm = Alarm.find_by(id: schedule_alarm_params[:alarm_id])
+    AlarmJob.set(wait_until: Time.parse(schedule_alarm_params[:time])).perform_later @user, alarm
+    render json: true
   end
 
   private
@@ -46,5 +54,9 @@ class UsersController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def user_params
       params.permit(:username, :facebook_connection)
+    end
+
+    def schedule_alarm_params
+      params.permit(:id, :alarm_id, :time)
     end
 end
