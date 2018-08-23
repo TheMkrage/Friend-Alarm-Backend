@@ -40,8 +40,19 @@ class UsersController < ApplicationController
 
   # POST /users/:id/schedule
   def schedule_alarm
+    @user.alarm_time = schedule_alarm_params[:time]
+    @user.save
     alarm = Alarm.find_by(id: schedule_alarm_params[:alarm_id])
     AlarmJob.set(wait_until: Time.parse(schedule_alarm_params[:time])).perform_later @user, alarm
+    puts "Alarm Set"
+    render json: true
+  end
+
+  # DELETE /users/:id/schedule
+  def unschedule_alarm
+    @user.alarm_time = nil
+    @user.save
+    puts "Alarm UN-Set"
     render json: true
   end
 
