@@ -64,7 +64,7 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.permit(:username, :facebook_connection)
+      params.permit(:username, :facebook_connection, :apn_token)
     end
 
     def schedule_alarm_params
