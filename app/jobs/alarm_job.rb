@@ -10,7 +10,7 @@ class AlarmJob < ApplicationJob
       return
     end
     alarm_time = Time.parse(user.alarm_time)
-    if Time.Now > alarm_time + 60
+    if Time.now > alarm_time + 60
       puts "old job"
       return
     end
