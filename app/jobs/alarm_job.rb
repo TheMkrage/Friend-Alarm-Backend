@@ -5,6 +5,15 @@ class AlarmJob < ApplicationJob
   APN = Houston::Client.development
 
   def perform(user, alarm)
+    if user.alarm_time == nil
+      puts "alarm no longer set"
+      return
+    end
+    alarm_time = Time.parse(user.alarm_time)
+    if Time.Now > alarm_time + 60
+      puts "old job"
+      return
+    end
 
     APN.certificate = File.read('apple_push_notification_dev.pem')
 
