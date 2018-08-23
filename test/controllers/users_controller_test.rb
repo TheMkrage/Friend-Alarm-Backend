@@ -40,4 +40,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     post url, params: { alarm_id: alarms(:valid).id, time: "2018-08-17T04:58:17.000Z" }, as: :json
     assert_response 200
   end
+
+  test "unschedule alarm" do
+    @user.alarm_time = Time.now
+    @user.save
+    url = user_url(@user) + "/schedule"
+    delete url, as: :json
+    @user.reload
+    assert_nil @user.alarm_time
+  end
 end

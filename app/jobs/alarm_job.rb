@@ -19,9 +19,7 @@ class AlarmJob < ApplicationJob
 
     # Create a notification that alerts a message to the user, plays a sound, and sets the badge on the app
     notification = Houston::Notification.new(device: user.apn_token)
-    puts "helo"
     notification.alert = alarm.name + " from " + alarm.user.username
-    puts user.apn_token
     # Notifications can also change the badge count, have a custom sound, have a category identifier, indicate available Newsstand content, or pass along arbitrary data.
     notification.category = 'ALARM'
     notification.content_available = true
@@ -30,8 +28,10 @@ class AlarmJob < ApplicationJob
     else
       notification.custom_data = { id: alarm.id }
     end
-    #puts notification.custom_data
-    # And... sent! That's all it takes.
     APN.push(notification)
+
+    # Schedule next alarm
+    user.alarm_time = (alarm_time + 1.day).iso8601
+    user.save
   end
 end

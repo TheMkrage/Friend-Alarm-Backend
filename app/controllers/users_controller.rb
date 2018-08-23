@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy, :alarms, :schedule_alarm]
+  before_action :set_user, only: [:show, :update, :destroy, :alarms, :schedule_alarm, :unschedule_alarm]
 
   # GET /users/1
   def show
@@ -52,7 +52,6 @@ class UsersController < ApplicationController
   def unschedule_alarm
     @user.alarm_time = nil
     @user.save
-    puts "Alarm UN-Set"
     render json: true
   end
 
