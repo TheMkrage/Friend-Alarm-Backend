@@ -42,10 +42,8 @@ class UsersController < ApplicationController
   def schedule_alarm
     @user.alarm_time = schedule_alarm_params[:time]
     @user.save
-    puts "schedule"
-    puts schedule_alarm_params[:alarm_id]
     alarm = Alarm.find_by(id: schedule_alarm_params[:alarm_id])
-    puts alarm
+    alarm ||= @user.alarms.first
     AlarmJob.set(wait_until: Time.parse(schedule_alarm_params[:time])).perform_later @user, alarm
     puts "Alarm Set"
     render json: true

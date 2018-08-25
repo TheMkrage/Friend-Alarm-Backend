@@ -5,6 +5,7 @@ class AlarmJob < ApplicationJob
   APN = Houston::Client.development
 
   def perform(user, alarm)
+    # Ensure this alarm should still go off
     if user.alarm_time == nil
       puts "alarm no longer set"
       return
@@ -15,15 +16,30 @@ class AlarmJob < ApplicationJob
       return
     end
 
+    # see if there is a higher priority alarm
+    high_priority_alarm = UserAlarm.where(owner_id: user.id, is_high_priority: true).map {|user_alarm| user_alarm.alarm }.flatten.first
+    if high_priority_alarm != nil
+      puts "Found high priority"
+      alarm = high_priority_alarm
+      alarm.is_high_priority = false
+      alarm.save
+    end
+
+    alarm ||= { id: -1, user: user, name: "ALARM!" }
+
     APN.certificate = File.read('apple_push_notification_dev.pem')
 
     # Create a notification that alerts a message to the user, plays a sound, and sets the badge on the app
     notification = Houston::Notification.new(device: user.apn_token)
-    notification.alert = alarm.name + " from " + alarm.user.username
+    if user.id == alarm.user.id
+      notification.alert = alarm.name
+    else
+      notification.alert = alarm.name + " from " + alarm.user.username
+    end
     # Notifications can also change the badge count, have a custom sound, have a category identifier, indicate available Newsstand content, or pass along arbitrary data.
     notification.category = 'ALARM'
     notification.content_available = true
-    if alarm.audio_file.attached?
+    if alarm.id != -1 && alarm.audio_file.attached?
       notification.custom_data = { id: alarm.id, url: alarm.audio_file.service_url }
     else
       notification.custom_data = { id: alarm.id }
