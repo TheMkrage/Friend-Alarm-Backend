@@ -17,14 +17,16 @@ class AlarmJob < ApplicationJob
     end
 
     # see if there is a higher priority alarm
-    high_priority_alarm = UserAlarm.where(owner_id: user.id, is_high_priority: true).map {|user_alarm| user_alarm.alarm }.flatten.first
+    user_alarm = UserAlarm.where(owner_id: user.id, is_high_priority: true).first
+    high_priority_alarm = user_alarm.alarm
     if high_priority_alarm != nil
       puts "Found high priority"
       alarm = high_priority_alarm
-      alarm.is_high_priority = false
-      alarm.save
+      user_alarm.is_high_priority = false
+      user_alarm.save
     end
 
+    puts alarm
     alarm ||= { id: -1, user: user, name: "ALARM!" }
 
     APN.certificate = File.read('apple_push_notification_dev.pem')
