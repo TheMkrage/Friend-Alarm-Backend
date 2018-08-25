@@ -35,7 +35,7 @@ class UsersController < ApplicationController
 
   # GET /users/:id/alarms
   def alarms
-    render json: @user.alarms
+    render json: @user.alarms, user_id: @user.id
   end
 
   # POST /users/:id/schedule
