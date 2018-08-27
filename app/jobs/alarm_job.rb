@@ -18,8 +18,9 @@ class AlarmJob < ApplicationJob
 
     # see if there is a higher priority alarm
     user_alarm = UserAlarm.where(owner_id: user.id, is_high_priority: true).first
-    high_priority_alarm = user_alarm.alarm
-    if high_priority_alarm != nil
+
+    if user_alarm != nil
+      high_priority_alarm = user_alarm.alarm
       puts "Found high priority"
       alarm = high_priority_alarm
       user_alarm.is_high_priority = false
