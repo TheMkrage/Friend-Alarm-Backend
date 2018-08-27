@@ -44,7 +44,7 @@ class AlarmJob < ApplicationJob
     notification.content_available = true
     if alarm.id != -1 && alarm.audio_file.attached?
       notification.custom_data = { isSecond: false, id: alarm.id, url: alarm.audio_file.service_url }
-      AlarmFollowupJob.wait(30.second).perform_later(user, alarm)
+      AlarmFollowupJob.set(wait: 30.seconds).perform_later(user, alarm)
     else
       notification.custom_data = { isSecond: false, id: alarm.id }
     end
