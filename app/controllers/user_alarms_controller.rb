@@ -15,6 +15,13 @@ class UserAlarmsController < ApplicationController
 
   # POST /user_alarms
   def create
+    potential_exisitng_alarm = UserAlarm.where(owner_id: user_alarm_params[:owner_id], referrer_id: user_alarm_params[:referrer_id], alarm_id: user_alarm_params[:alarm_id]).first
+    if potential_exisitng_alarm != nil
+      potential_exisitng_alarm.is_secret = user_alarm_params[:is_secret]
+      potential_exisitng_alarm.is_high_priority = user_alarm_params[:is_high_priority]
+      render json: potential_exisitng_alarm, status: :created
+      return
+    end
     @user_alarm = UserAlarm.new(user_alarm_params)
 
     if @user_alarm.save

@@ -11,9 +11,7 @@ class UserAlarmsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create user_alarm" do
-    assert_difference('UserAlarm.count') do
-      post user_alarms_url, params: @user_alarm, as: :json
-    end
+    post user_alarms_url, params: @user_alarm, as: :json
 
     assert_response 201
   end
