@@ -17,7 +17,7 @@ class AlarmJob < ApplicationJob
       return
     end
 
-    #alarm = user.alarms.sample
+    alarm = user.alarms.sample
 
     # see if there is a higher priority alarm
     user_alarm = UserAlarm.where(owner_id: user.id, is_high_priority: true).first
