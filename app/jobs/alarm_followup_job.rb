@@ -8,11 +8,7 @@ class AlarmFollowupJob < ApplicationJob
 
     # Create a notification that alerts a message to the user, plays a sound, and sets the badge on the app
     notification = Houston::Notification.new(device: user.apn_token)
-    if user.id == alarm.user.id
-      notification.alert = alarm.name
-    else
-      notification.alert = alarm.name + " from " + alarm.user.username
-    end
+    notification.alert = "Hopefully that woke you up"
     # Notifications can also change the badge count, have a custom sound, have a category identifier, indicate available Newsstand content, or pass along arbitrary data.
     notification.category = 'ALARM'
     notification.content_available = true
