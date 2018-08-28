@@ -36,9 +36,7 @@ class AlarmJob < ApplicationJob
     # Create a notification that alerts a message to the user, plays a sound, and sets the badge on the app
     notification = Houston::Notification.new(device: user.apn_token)
     puts alarm.id
-    if alarm.id == -1
-      notification.alert = "ALARM"
-    elsif user.id == alarm.user.id
+    if user.id == alarm.user.id
       notification.alert = alarm.name
     else
       notification.alert = alarm.name + " from " + alarm.user.username
