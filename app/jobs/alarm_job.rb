@@ -2,7 +2,7 @@ class AlarmJob < ApplicationJob
   queue_as :default
 
   require 'houston'
-  APN = Houston::Client.development
+  APN = Houston::Client.production
 
   def perform(user, alarm)
     # Ensure this alarm should still go off

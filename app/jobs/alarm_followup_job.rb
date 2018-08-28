@@ -1,7 +1,7 @@
 class AlarmFollowupJob < ApplicationJob
   queue_as :default
   require 'houston'
-  APN = Houston::Client.development
+  APN = Houston::Client.production
 
   def perform(user, alarm)
     APN.certificate = File.read('apple_push_notification_dev.pem')
