@@ -29,7 +29,7 @@ class AlarmJob < ApplicationJob
     end
 
     puts alarm
-    alarm ||= OpenStruct(id: -1, user: user, name: "ALARM!")
+    alarm ||= OpenStruct.new(id: -1, user: user, name: "ALARM!")
     puts alarm
     APN.certificate = File.read('apple_push_notification_dev.pem')
 
