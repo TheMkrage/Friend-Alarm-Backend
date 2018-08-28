@@ -4,7 +4,7 @@ class AlarmFollowupJob < ApplicationJob
   APN = Houston::Client.production
 
   def perform(user, alarm)
-    APN.certificate = File.read('apple_push_notification_dev.pem')
+    APN.certificate = File.read('production.pem')
 
     # Create a notification that alerts a message to the user, plays a sound, and sets the badge on the app
     notification = Houston::Notification.new(device: user.apn_token)
