@@ -2,6 +2,7 @@ class AlarmJob < ApplicationJob
   queue_as :default
 
   require 'houston'
+  require 'ostruct'
   APN = Houston::Client.production
 
   def perform(user, alarm)
@@ -28,12 +29,13 @@ class AlarmJob < ApplicationJob
     end
 
     puts alarm
-    alarm ||= { id: -1, user: user, name: "ALARM!" }
-
+    alarm ||= OpenStruct(id: -1, user: user, name: "ALARM!")
+    puts alarm
     APN.certificate = File.read('apple_push_notification_dev.pem')
 
     # Create a notification that alerts a message to the user, plays a sound, and sets the badge on the app
     notification = Houston::Notification.new(device: user.apn_token)
+    puts alarm.id
     if alarm.id == -1
       notification.alert = "ALARM"
     elsif user.id == alarm.user.id
